@@ -60,17 +60,17 @@ Model size for language models are usually characterized by *number of parameter
 - Best open models: \~1T
 - With consumer hardware, 100B is usually the limit (...Why?)
 
-== Model size and memory requirement
+== Which "memory"?
 
-=== Which "memory"?
+Traditionally LLMs are deployed on GPUs, so the model needs to fit on the VRAM.
 
-(Usually) LLMs are deployed on GPUs, so the model needs to fit on the VRAM.
+- *Exceptions:*
+  - Newer Macs, some AMD chipsets, (and game consoles) use _unified memory_, which means that system RAM and VRAM are shared.
+  - _GGUF_ model format makes offloading part of the model in system RAM easy, albeit with a small performance overhead.
 
-- *Exceptions:* Newer Macs, some AMD chipsets, (and game consoles) use _unified memory_, which means that system RAM can work as VRAM.
+Practically, "memory" refers to system RAM + VRAM.
 
-#pause
-
-=== Deriving memory requirement from model size
+== Deriving memory requirement from model size
 
 - *Model parameters:* $"memory" = "number of parameters" * "bits per parameter"$
   - By default, LLMs use `FP16` (16bit). A 100B model will consume $100"B" * 16"bit" = 200"GB"$.
@@ -108,20 +108,83 @@ Model size for language models are usually characterized by *number of parameter
 
 == How "speed" is measured
 
+One call to the LLM involves two main steps:
+
+1. *Prefill/Prompt evaluation*: The model processes the whole prompt/context in one pass.
+2. *Generation*: The model generates the output tokens one by one.
+
+The speed for each step can be measured by *token per second*.
+
+- Prefill is much faster because it's parallel
+- Which one is more important depends on use case
+
 == Factors affecting "speed"
 
-== Optimizations: MTP
+- *Model size*: Larger model -> More computations and more data to move around
+- *GPU processing power*: Usually measured in TFLOPS (floating point ops per second)
+- *Quantization*: Lower quantization bits -> generally faster
+- *Model features*: MoE, MTP...
+- Others:
+  - Underlying framework & drivers
+  - Platform-specific optimizations
+
+== Mixture of Experts (MoE)
+
+#slide[
+*Mixture of Experts* models contain many different sub-models (“experts”), and during inference only one "expert" is activated.#footnote[Simplified explanation]
+- Memory requirement is still high, but inference speed is much faster.
+- e.g. `Gemma-4-26B-A4B` has 26B parameters, but only 4B is activated at a time.
+- Usually slightly _less capable_ compared to "dense" models at same size.
+][
+  #figure(
+  image("imgs/diag_moe.png"),
+  caption: [Illustration of MoE#footnote[Image credit: https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-mixture-of-experts]]
+  )
+]
+
+== Multi-token Prediction (MTP)
+
+#slide[
+Some models support *Multi-token Prediction*, which uses a _"draft and verify"_ approach to generate multiple tokens in parallel, with _no accuracy loss_#footnote[Simplified explanation].
+- If available, turning on can improve generation speed.
+][
+  #figure(
+    image("imgs/diag_mtp.webp"),
+    caption: [
+      Visualizing MTP#footnote[
+        Image credit: https://medium.com/data-science-collective/deepseek-explained-4-multi-token-prediction-33f11fe2b868
+      ]
+    ]
+  )
+]
 
 = Model repositories and Inference frameworks
 
-== Where to find & download models?
+== Choosing an inference framework
 
-== All the different frameworks!
+- End goal is the same for all of them: An *OpenAI-compatible* API server.
+- The main ones: vLLM, SGLang, Ollama, llama.cpp
+  - For local deployment with quantized GGUFs, *llama.cpp* is recommended.
+  - vLLM or SGLang may be a good choice for Nvidia hardware.
+- Easy and powerful solutions:
+  - *Ramalama* for people willing to work with containers. Uses vLLM or llama.cpp under the hood, while simplifying the setting up process.
+  - *Unsloth studio* for people liking GUI. Full selection of models and quants available.
+
+== Finding models to download
+
+Major model repositories:
+
+- *Huggingface*: https://huggingface.co/models
+- *Ollama*: https://ollama.com/library?sort=newest
+
+For finding quantized GGUFs:
+
+- #link("https://unsloth.ai/docs/models/tutorials")[*Unsloth*] provides quants for all the latest open source models. It often comes with fixes for the model, and tutorials. _Recommended!_
 
 = Demo
 
 == Setting up a local LLM, live
 
-1. Choosing a (quantized) model
-2. Running it in llama.cpp
-3. Running it in Ramalama
+1. Choosing a model based on the hardware
+2. Downloading a quantized GGUF
+3. Running it using a inference framework
