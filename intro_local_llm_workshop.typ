@@ -179,7 +179,7 @@ Major model repositories:
 
 For finding quantized GGUFs:
 
-- #link("https://unsloth.ai/docs/models/tutorials")[*Unsloth*] provides quants for all the latest open source models. It often comes with fixes for the model, and tutorials. _Recommended!_
+- #link("https://unsloth.ai/docs/models/tutorials")[*Unsloth*] provides quants for all the latest open models. It often comes with fixes for the model, and tutorials. _Recommended!_
 
 = Demo
 
