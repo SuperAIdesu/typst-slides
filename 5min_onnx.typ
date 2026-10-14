@@ -61,6 +61,27 @@
   )
 ]
 
+== Exporting & Visualizing
+
+#align(horizon)[
+  - Exporting a Pytorch model:
+  ```python
+  torch_model = ImageClassifierModel()
+  example_inputs = (torch.randn(1, 1, 32, 32),)
+  onnx_program = torch.onnx.export(torch_model, example_inputs, dynamo=True)
+  onnx_program.save("image_classifier_model.onnx")
+  ```
+  - Visualizing: https://netron.app/
+]
+
+== Run your neural nets anywhere (really)
+
+#figure(
+  image("imgs/onnx_eps.png", width: 90%),
+  caption: [Execution Providers]
+)
+
+
 = ort
 
 == Rust runtime for ONNX
@@ -78,9 +99,20 @@
   ]
 ]
 
-== Run your neural nets anywhere (really)
+= Demo?
 
-#figure(
-  image("imgs/onnx_eps.png", width: 90%),
-  caption: [Execution Providers]
+== I want to see a demo!
+
+- My laptop is not suitable for this#footnote[No dGPU]!
+#pause
+- My desktop is also not suitable for this#footnote[Backends on Strix Halo is a bit unstable]!
+#pause
+- So I got XNNPACK EP working on my desktop#footnote[CPU Acceleration, requires compiling ONNX runtime from scratch].
+- The LSTM model used in my voice project#footnote[\<100ms is acceptable, so it's kinda useless]:
+
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 1cm,
+  figure(image("imgs/demo_xnnpack.png", width: 80%), caption: [XNNPACK]),
+  figure(image("imgs/demo_cpu.png", width: 70%), caption: [Default CPU]),
 )
