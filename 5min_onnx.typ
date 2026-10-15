@@ -44,7 +44,7 @@
   Workflow:
   - *Convert* model from the training framework to ONNX.
   - Run the model on devices with ONNX *runtime*.
-  - Use different *execution providers* for different hardware for acceleration.
+  - Use different *execution providers (EPs)* for different hardware for acceleration.
 ]
 ]
 
@@ -108,7 +108,7 @@
 - My desktop is also not suitable for this#footnote[Backends on Strix Halo is a bit unstable]!
 #pause
 - So I got XNNPACK EP working on my desktop#footnote[CPU Acceleration, requires compiling ONNX runtime from scratch].
-- The LSTM model used in my voice project#footnote[\<100ms is acceptable, so it's kinda useless]:
+- The LSTM model used in my voice project#footnote[\<100ms is acceptable for use in the app, so it's kinda useless]:
 
 #grid(
   columns: (1fr, 1fr),
