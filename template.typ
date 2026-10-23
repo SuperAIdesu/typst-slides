@@ -1,5 +1,5 @@
 #import "@preview/touying:0.8.0": *
-#import themes.university: *
+#import themes.metropolis: *
 #import "@preview/cetz:0.5.2"
 #import "@preview/fletcher:0.5.8" as fletcher: node, edge
 #import "@preview/numbly:0.1.0": numbly
@@ -14,8 +14,34 @@
 //#let cetz-canvas = touying-reducer.with(reduce: cetz.canvas, cover: cetz.draw.hide.with(bounds: true))
 #let cetz-canvas = touying-reduce.with(cetz)
 
-#show: university-theme.with(
+#set text(
+  font: "Fira Sans",
+  weight: "light",
+  size: 20pt,
+)
+#show raw: set text(font: "FiraCode Nerd Font Mono")
+
+
+#show: metropolis-theme.with(
   aspect-ratio: "16-9",
+  // catppuccin Macchiato
+  // config-colors(
+  //   primary: rgb("#f0c6c6"),
+  //   primary-light: rgb("#f4dbd6"),
+  //   secondary: rgb("#f4dbd6"),
+  //   neutral-lightest: rgb("#24273a"),
+  //   neutral-dark: rgb("#b8c0e0"),
+  //   neutral-darkest: rgb("#cad3f5"),
+  // ),
+  // catppuccin latte
+  config-colors(
+    primary: rgb("#dc8a78"),
+    primary-light: rgb("#dc8a78"),
+    secondary: rgb("#dd7878"),
+    neutral-lightest: rgb("#eff1f5"),
+    neutral-dark: rgb("#5c5f77"),
+    neutral-darkest: rgb("#4c4f69"),
+  ),
   // align: horizon,
   // config-common(handout: true),
   config-common(frozen-counters: (theorem-counter,)),  // freeze theorem counter for animation
@@ -29,6 +55,12 @@
     logo: emoji.school,
   ),
 )
+
+// Customize block backgrounds.
+// #let theorem = theorem.with(fill: rgb("#b7bdf8"))
+// #let definition = definition.with(fill: rgb("#91d7e3"))
+// #let corollary = corollary.with(fill: rgb("#f5a97f"))
+// #let example = example.with(fill: rgb("#f5bde6"))
 
 #set heading(numbering: numbly("{1}.", default: "1.1"))
 
