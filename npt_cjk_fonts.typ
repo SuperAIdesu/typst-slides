@@ -262,10 +262,25 @@ Blindly transfering a font design to a different CJK language usually will not r
   But when using the same style in Chinese text, it will appear messy and hard to read.
 ]
 
+== (Simplified) Chinese font scene is getting competitive
+
+- The default Chinese fonts bundled with older versions of Windows#footnote[before Windows 10] were terrible
+- Stock Android use the Noto/Source Han font series, which is good but not great
+- Since the 2020s, popular OS and phone vendors in China have released their own fonts, which have become an important part of their branding and marketing:
+  - Apple: PingFang
+  - Huawei: HarmonyOS Sans, Honor Sans
+  - Oppo: Oppo Sans
+  - Xiaomi: Mi Sans
+  - Vivo: Vivo Sans
+  - Oneplus: Oneplus Slate
+  - ...
+
+
+
 = End
 
 #focus-slide[
-  This topic goes very deep, but that's all I have.
+  That's all I have,
 
   Hope you enjoyed my infodump on this rabbit hole :)
 ]
