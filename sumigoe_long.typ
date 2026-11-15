@@ -123,7 +123,7 @@ Fairly straightforward?
 
 == Software design considerations and why I choose Rust
 
-- I would like the app to be *corss-platform* (desktop and mobile).
+- I would like the app to be *cross-platform* (desktop and mobile).
 - I would like to deploy *ML models on-device* and optimize them.
 - I would like the app to be *local* and private, without the need to deploy a server.
 - #strike[I would like to minimize the need to learn web development, such as JS/TS.]
@@ -156,7 +156,7 @@ Why Rust fits my needs?
   - In `Dioxus`, UI is declared using `rsx!` macro.
   - HTML elements and CSS classes are written in the macro. It's said to be "a blend between HTML and SwiftUI".
   - There are a lot of syntax sugar in `rsx!`, for things like conditional rendering and string formatting.
-  - It's rendered using _system Webview_#footnote[There is also a experimental native renderer.] on desktop and mobile.
+  - It's rendered using _system Webview_#footnote[There is also an experimental native renderer.] on desktop and mobile.
 ][
   ```rs
   #[component]
@@ -465,3 +465,12 @@ fn main() {
 
 - Models I usually use: GLM-5.3 Flash, Deepseek v4.1 Flash
 - I am "forced" to closely review LLM output, pushback against bad parts of its plan, and form my own judgement along the way.
+
+
+==
+
+#focus-slide[
+  That's all.
+
+  Thank you for listening!
+]
