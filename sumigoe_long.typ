@@ -50,9 +50,17 @@
 
 == What is Sumigoe?
 
-It's a companion app for *voice therapy/training*. It's designed mainly for trans, non-binary and gender non-conforming people, who would like to modify the perceived qualities of their voices.
+It's a companion app for *voice therapy/training*. It's designed mainly for trans, non-binary and gender non-conforming people#footnote[may also be useful to certain singers and performers], who would like to modify the perceived qualities of their voices.
 
-The main feature is *realtime pitch and resonance (formants) tracking and visualization*#footnote[I will not explain too much on what formants are in this presentation, for the sake of time, but feel free to read this: https://www.voicescienceworks.org/harmonics-vs-formants.html], providing important feedback for users' learning and practice.
+The main feature is *realtime pitch and resonance (formants) tracking and visualization*, providing important feedback for users' learning and practice.
+
+#block(fill: rgb(223, 142, 29, 40), inset: 12pt, radius: 6pt)[
+  #align(horizon)[
+    / Pitch: Foundamental frequency of the voice
+    / Formants: A set of frequencies amplified by the vocal tract
+    / Resonance: A quality of voice that is usually described as bright/dark, highly linked to formants
+  ]
+]
 
 == Demo/screenshot
 
